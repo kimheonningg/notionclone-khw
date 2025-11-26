@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { CSSProperties } from "react";
 
 import Sidebar from "../ui/sidebar/Sidebar";
+import SearchOverlay from "../ui/search/SearchOverlay";
 import { KeyboardDoubleArrowRight } from "@mui/icons-material";
 
 const mainPageStyles: Record<string, CSSProperties> = {
@@ -22,15 +23,27 @@ const mainPageStyles: Record<string, CSSProperties> = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    zIndex: 1100,
   },
   content: {
     flex: 1,
     background: "var(--gray-50)",
+    overflowY: "auto",
   },
 };
 
 const MainPage = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [activeId, setActiveId] = useState<string | undefined>("home");
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const handleSidebarItemClick = (id: string) => {
+    setActiveId(id);
+
+    if (id === "search") {
+      setSearchOpen(true);
+    }
+  };
 
   return (
     <div style={mainPageStyles.wrap}>
@@ -38,6 +51,8 @@ const MainPage = () => {
       <Sidebar
         collapsed={collapsed}
         onToggle={() => setCollapsed(!collapsed)}
+        activeId={activeId}
+        onItemClick={handleSidebarItemClick}
       />
       {collapsed && (
         <button
@@ -50,6 +65,9 @@ const MainPage = () => {
 
       {/* Main Content */}
       <div style={mainPageStyles.content}></div>
+
+      {/* SearchOverlay */}
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     </div>
   );
 };

@@ -37,3 +37,8 @@ This project will open at `http://localhost:5173`
   - `ui/`
   - `utils/`
   - `main.tsx`
+
+## Features
+
+- Sidebar 열기 / 닫기
+- 검색창
