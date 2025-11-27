@@ -190,7 +190,7 @@ const Sidebar = ({
                     key={page.id}
                     item={{
                       id: page.id,
-                      label: page.title || "제목 없음",
+                      label: page.title || "제목 없는 페이지",
                       icon: page.icon ? (
                         <span>{page.icon}</span>
                       ) : (

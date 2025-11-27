@@ -9,6 +9,7 @@ import PageHeader from "../ui/editor/PageHeader";
 import PageEditor from "../ui/editor/PageEditor";
 
 import { usePages } from "../hooks/usePages";
+import { getBreadcrumbs } from "../utils/breadCrumbs";
 
 const mainPageStyles: Record<string, CSSProperties> = {
   wrap: {
@@ -84,9 +85,16 @@ const MainPage = () => {
         return activePage;
       }, [activePage.id]);
 
+      const breadcrumbItems = getBreadcrumbs(activePage, pages);
+
       return (
         <>
-          <PageHeader title={activePage.title} icon={activePage.icon || "📄"} />
+          <PageHeader
+            title={activePage.title}
+            icon={activePage.icon || "📄"}
+            breadcrumbItems={breadcrumbItems}
+            onBreadcrumbClick={(id) => setActivePage(id)}
+          />
           <PageEditor
             // Reset editor component whenever page ID changes
             key={activePage.id}

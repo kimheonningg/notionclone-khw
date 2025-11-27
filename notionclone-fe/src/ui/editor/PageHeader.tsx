@@ -1,13 +1,20 @@
 import type { CSSProperties } from "react";
+import type { BreadcrumbItem } from "../../types/page";
+import BreadCrumb from "./BreadCrumb";
 
 interface PageHeaderProps {
   title: string;
-  icon?: string; // Page emoji / icon
+  icon?: string;
+  breadcrumbItems: BreadcrumbItem[];
+  onBreadcrumbClick: (id: string) => void;
 }
 
 const pageHeaderStyles: Record<string, CSSProperties> = {
   wrap: {
     padding: "48px 80px 24px",
+  },
+  breadcrumbRow: {
+    marginBottom: 16,
   },
   emojiRow: {
     fontSize: 56,
@@ -37,9 +44,18 @@ const pageHeaderStyles: Record<string, CSSProperties> = {
   },
 };
 
-const PageHeader = ({ title, icon = "👋" }: PageHeaderProps) => {
+const PageHeader = ({
+  title,
+  icon = "👋",
+  breadcrumbItems,
+  onBreadcrumbClick,
+}: PageHeaderProps) => {
   return (
     <header style={pageHeaderStyles.wrap}>
+      <div style={pageHeaderStyles.breadcrumbRow}>
+        <BreadCrumb items={breadcrumbItems} onItemClick={onBreadcrumbClick} />
+      </div>
+
       <div style={pageHeaderStyles.emojiRow}>{icon}</div>
 
       {/* <div style={pageHeaderStyles.actionRow}>

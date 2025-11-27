@@ -14,7 +14,7 @@ const breadcrumbStyles: Record<string, CSSProperties> = {
     gap: 6,
     fontSize: 14,
     color: "var(--gray-500)",
-    marginBottom: 12,
+    marginBottom: 36,
   },
   button: {
     border: "none",
