@@ -4,7 +4,7 @@ import "@blocknote/mantine/style.css";
 import type { CSSProperties } from "react";
 import { useEffect, useMemo } from "react";
 
-import { filterSuggestionItems } from "@blocknote/core";
+import { filterSuggestionItems, type PartialBlock } from "@blocknote/core";
 import { BlockNoteView } from "@blocknote/mantine";
 import {
   getDefaultReactSlashMenuItems,
@@ -12,13 +12,8 @@ import {
   useCreateBlockNote,
 } from "@blocknote/react";
 
+import { FALLBACK_BLOCKS } from "../../constants/predefinedBlocks";
 import type { Page } from "../../types/page";
-
-const editorStyles: Record<string, CSSProperties> = {
-  wrap: {
-    margin: "0 auto",
-  },
-};
 
 interface PageEditorProps {
   page: Page;
@@ -26,19 +21,31 @@ interface PageEditorProps {
   onCreateChildPage: () => string; // Make new child page and return id
 }
 
+const pageEditorStyles: Record<string, CSSProperties> = {
+  wrap: {
+    margin: "0 auto",
+  },
+};
+
 const PageEditor = ({
   page,
   onChangeBlocks,
   onCreateChildPage,
 }: PageEditorProps) => {
+  const initialBlocks =
+    page.blocks && page.blocks.length > 0 ? page.blocks : FALLBACK_BLOCKS;
+
   const editor = useCreateBlockNote({
-    initialContent: page.blocks,
+    initialContent: initialBlocks,
   });
 
   // Switch content when page changes
   useEffect(() => {
-    editor.replaceBlocks(editor.document, page.blocks);
-  }, [page.id]);
+    const nextBlocks =
+      page.blocks && page.blocks.length > 0 ? page.blocks : FALLBACK_BLOCKS;
+
+    editor.replaceBlocks(editor.document, nextBlocks);
+  }, [page.id, page.blocks, editor]);
 
   // Slash menu items
   const slashItems = useMemo(() => {
@@ -66,7 +73,7 @@ const PageEditor = ({
   }, [editor, onChangeBlocks]);
 
   return (
-    <main style={editorStyles.wrap}>
+    <main style={pageEditorStyles.wrap}>
       <BlockNoteView editor={editor} theme="light" slashMenu={false}>
         <SuggestionMenuController
           triggerCharacter="/"
