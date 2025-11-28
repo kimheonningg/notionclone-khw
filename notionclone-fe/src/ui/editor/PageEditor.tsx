@@ -15,7 +15,7 @@ import {
 import { FALLBACK_BLOCKS } from "../../constants/predefinedBlocks";
 import type { Page } from "../../types/page";
 
-import { NewPageSlashItem } from "../../constants/customSlashItems/newPageSlashItem";
+import { NewPageSlashItem } from "../../constants/customSlashItems/NewPageSlashItem";
 interface PageEditorProps {
   page: Page;
   onChangeBlocks: (blocks: any) => void;
