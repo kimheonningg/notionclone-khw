@@ -19,6 +19,7 @@ const rowStyles: Record<string, CSSProperties> = {
     cursor: "pointer",
     color: "var(--gray-700)",
     userSelect: "none",
+    transition: "background 0.1s ease, color 0.1s ease",
   },
   itemHover: {
     background: "var(--gray-200)",
@@ -26,6 +27,7 @@ const rowStyles: Record<string, CSSProperties> = {
   itemActive: {
     background: "var(--gray-50)",
     boxShadow: "0 0 0 1px rgba(0,0,0,0.04)",
+    color: "var(--gray-900)",
   },
   icon: {
     width: 20,
@@ -53,14 +55,19 @@ const rowStyles: Record<string, CSSProperties> = {
 const SidebarItemRow = ({ item, isActive, onClick }: SidebarItemRowProps) => {
   const [hover, setHover] = useState(false);
 
+  // activate only if onClick exist
+  const isClickable = !!onClick;
+
   return (
     <li
       style={{
         ...rowStyles.item,
-        ...(hover ? rowStyles.itemHover : {}),
+        // Hover is only allowed when clickable
+        ...(isClickable && hover ? rowStyles.itemHover : {}),
+
         ...(isActive ? rowStyles.itemActive : {}),
       }}
-      onClick={onClick}
+      onClick={isClickable ? onClick : undefined}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

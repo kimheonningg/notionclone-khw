@@ -17,6 +17,9 @@ import HoverIconButton from "./HoverIconButton";
 import { USER_NAME } from "../../constants/userName";
 import { NO_TITLE_PAGE_TITLE } from "../../constants/page";
 
+// constant to disabled un-implemented rows, remove later
+const IMPLEMENTED_IDS = ["search", "trash"];
+
 interface SidebarProps {
   collapsed: boolean;
   onToggle: () => void;
@@ -197,16 +200,23 @@ const Sidebar = ({
 
                 <ul style={sidebarStyles.itemList}>
                   {/* Static item rendering */}
-                  {section.items.map((item) => (
-                    <SidebarItemRow
-                      key={item.id}
-                      item={item}
-                      isActive={activeId === item.id}
-                      onClick={
-                        onItemClick ? () => onItemClick(item.id) : undefined
-                      }
-                    />
-                  ))}
+                  {section.items.map((item) => {
+                    const isImplemented = IMPLEMENTED_IDS.includes(item.id);
+
+                    return (
+                      <SidebarItemRow
+                        key={item.id}
+                        item={item}
+                        isActive={activeId === item.id}
+                        onClick={
+                          // no onclick function -> deactivates SidebarItemRow
+                          isImplemented && onItemClick
+                            ? () => onItemClick(item.id)
+                            : undefined
+                        }
+                      />
+                    );
+                  })}
 
                   {/* Dynamic item rendering */}
                   {section.id === "personal" &&
