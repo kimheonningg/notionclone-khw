@@ -4,8 +4,8 @@ import type { CSSProperties, ReactNode } from "react";
 import { KeyboardDoubleArrowRight } from "@mui/icons-material";
 
 import Sidebar from "../ui/sidebar/Sidebar";
-import SearchOverlay from "../ui/search/SearchOverlay";
-import TrashCanOverlay from "../ui/trashcan/TrashCanOverlay";
+import SearchOverlay from "../ui/overlay/SearchOverlay";
+import TrashCanOverlay from "../ui/overlay/TrashCanOverlay";
 import PageHeader from "../ui/editor/PageHeader";
 import PageEditor from "../ui/editor/PageEditor";
 
