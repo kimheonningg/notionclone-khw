@@ -187,50 +187,35 @@ const Sidebar = ({
                       }
                     />
                   ))}
+
+                  {/* Adds newly created pages here */}
+                  {section.label === "개인 페이지" &&
+                    rootIds.map((id) => {
+                      const page = pages[id];
+                      if (!page) return null;
+
+                      return (
+                        <SidebarItemRow
+                          key={page.id}
+                          item={{
+                            id: page.id,
+                            label: page.title || NO_TITLE_PAGE_TITLE,
+                            icon: page.icon ? (
+                              <span>{page.icon}</span>
+                            ) : (
+                              <DescriptionOutlined fontSize="small" />
+                            ),
+                          }}
+                          isActive={activeId === page.id}
+                          onClick={
+                            onItemClick ? () => onItemClick(page.id) : undefined
+                          }
+                        />
+                      );
+                    })}
                 </ul>
               </section>
             ))}
-
-            <section style={sidebarStyles.section}>
-              <div style={sidebarStyles.sectionLabel}>개인 페이지</div>
-              <ul style={sidebarStyles.itemList}>
-                {rootIds.map((id) => {
-                  const page = pages[id];
-                  if (!page) return null;
-
-                  return (
-                    <SidebarItemRow
-                      key={page.id}
-                      item={{
-                        id: page.id,
-                        label: page.title || NO_TITLE_PAGE_TITLE,
-                        icon: page.icon ? (
-                          <span>{page.icon}</span>
-                        ) : (
-                          <DescriptionOutlined fontSize="small" />
-                        ),
-                      }}
-                      isActive={activeId === page.id}
-                      onClick={
-                        onItemClick ? () => onItemClick(page.id) : undefined
-                      }
-                    />
-                  );
-                })}
-
-                {rootIds.length === 0 && (
-                  <div
-                    style={{
-                      padding: "8px 12px",
-                      fontSize: 13,
-                      color: "var(--gray-500)",
-                    }}
-                  >
-                    페이지가 없습니다.
-                  </div>
-                )}
-              </ul>
-            </section>
           </div>
 
           <div style={sidebarStyles.bottom}>
