@@ -55,3 +55,33 @@ This project will open at `http://localhost:5173`
 - Sidebar에서도 -개인 페이지의 `+` 클릭하거나 우측 상단의 연필 이모티콘 클릭 - page 생성 가능 (Sidebar의 root page 목록은 동적으로 렌더링된다)
 - 휴지통 (기능 없이 UI만 구현- `TrashCanOverlay.tsx`)
 - Sidebar의 개별 페이지 탭에서 페이지 삭제하거나 해당 페이지의 하위 (Child) 페이지 생성 가능
+
+## 완료 사진
+
+### 1주차
+
+- 기본 화면 (`Sidebar.tsx`, `PageHeader.tsx`, `PageEditor.tsx` components, contents from `notionWelcome.ts`, `blocknote` library used)
+
+  ![DefaultScreen](./assets/DefaultScreen.png)
+
+- 검색창 (`SearchOverlay.tsx` component)
+
+  ![SearchOverlay](./assets/SearchOverlay.png)
+
+- 새로운 페이지는 `/page`로 생성 가능- custom해서 만든 기능 (`NewPageSlashItem.tsx`)
+
+  ![CustomPageSlashItem](./assets/CustomPageSlashItem.png)
+
+- 이렇게 만든 페이지는 기존 페이지에 아래 사진처럼 표시된다.
+
+  ![PageGenerated](./assets/PageGenerated.png)
+
+- Breadcrumb (Shows current page hierarchy, `BreadCrumb.tsx` component, `breadCrumbs.ts` utility function)
+
+  ![BreadCrumb](./assets/BreadCrumb.png)
+
+- 그 외에도 Sidebar의 위와 아래에서 페이지 생성 가능
+
+  ![GenerateRootPageViaSidebar](./assets/GenerateRootPageViaSidebar.png)
+
+  ![GenerateRootPageViaSidebarTop](./assets/GenerateRootPageViaSidebarTop.png)
