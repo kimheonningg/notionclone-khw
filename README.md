@@ -80,8 +80,14 @@ This project will open at `http://localhost:5173`
 
   ![BreadCrumb](./assets/BreadCrumb.png)
 
-- 그 외에도 Sidebar의 위와 아래에서 페이지 생성 가능
+- 그 외에도 Sidebar의 위와 아래에서 페이지 생성 가능- 여기서 만들어진 페이지는 모두 (page hierarchy의) root로 간주
 
   ![GenerateRootPageViaSidebar](./assets/GenerateRootPageViaSidebar.png)
 
+  ![NewPageGenerated](./assets/NewPageGenerated.png)
+
   ![GenerateRootPageViaSidebarTop](./assets/GenerateRootPageViaSidebarTop.png)
+
+- `휴지통` 클릭 시 (`TrashCanOverlay` component)
+
+  ![TrashCanOverlay](./assets/TrashCanOverlay.png)
